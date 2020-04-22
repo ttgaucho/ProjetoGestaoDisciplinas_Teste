@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+    </h:head>
+ 
+    <h:body>
+        <h:form id="form">
+            <p:panelGrid columns="2">
+                
+                <p:outputLabel value="Nome:"></p:outputLabel>
+                <p:inputText value="#{pessoaCon.pessoa.nome}"></p:inputText>
+                
+                <p:outputLabel value="Nascimento:"></p:outputLabel>
+                <p:calendar value="#{pessoaCon.pessoa.nascimento}" showOn="button"></p:calendar>
+                
+                <p:outputLabel value="Salário:"></p:outputLabel>
+                <p:inputNumber value="#{pessoaCon.pessoa.salario}" decimalPlaces="3"></p:inputNumber>
+                
+                <p:outputLabel value="% FGTS"></p:outputLabel>
+                <p:inputNumber value="#{pessoaCon.pessoa.fgts}" decimalPlaces="1"></p:inputNumber>
+                
+                <p:commandButton action="#{pessoaCon.calcular}" update="form" value="Calcular"></p:commandButton>
+                <p:commandButton action="#{pessoaCon.limpar}" update="form" value="Limpar"></p:commandButton>
+                
+                <p:outputLabel value="Resultato"></p:outputLabel>
+                <p:outputLabel value="#{pessoaCon.pessoa.resultado}"></p:outputLabel>
+                
+            </p:panelGrid>
+            <br/>
+            <p:dataTable var="p" value="#{pessoaCon.lista}" emptyMessage="Nada para mostrar!">
+            	<p:column>
+            	   <p:outputLabel value="#{p.nome}"></p:outputLabel>
+            	</p:column>
+            	<p:column>
+            	   <p:outputLabel value="#{p.resultado}"></p:outputLabel>
+            	</p:column>
+            </p:dataTable>
+            
+            
+        </h:form>
+        
+    </h:body>
+</html>

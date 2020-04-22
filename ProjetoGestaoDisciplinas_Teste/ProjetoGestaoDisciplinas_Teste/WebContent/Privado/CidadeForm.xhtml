@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+    </h:head>
+        
+        <!-- Painel de consulta -->
+        <p:panel id="consultar" visible="#{!cidadeCon.editando}">
+           <h:form>
+               <p:commandButton value="Incluir" action="#{cidadeCon.incluir}" 
+                  update="consultar editar"></p:commandButton>
+               <p:commandButton value="Alterar" action="#{cidadeCon.alterar}" 
+                  update="consultar editar"></p:commandButton>
+               <p:commandButton value="Excluir" action="#{cidadeCon.excluir}" 
+                  update="consultar"></p:commandButton>
+               <p:dataTable var="o" value="#{cidadeCon.lista}" emptyMessage="Nada para mostrar!">
+            	<p:column headerText="Código">
+            	   <p:outputLabel value="#{o.id}"></p:outputLabel>
+            	</p:column>
+            	<p:column headerText="Nome">
+            	   <p:outputLabel value="#{o.nome}"></p:outputLabel>
+            	</p:column>
+            	<p:column headerText="UF">
+            	   <p:outputLabel value="#{o.uf}"></p:outputLabel>
+            	</p:column>
+               </p:dataTable>
+           </h:form>
+        </p:panel> 
+        
+        
+        <!-- Painel de edição -->
+         <p:panel id="editar" visible="#{cidadeCon.editando}">
+            <h:form>
+            	<p:panelGrid columns="2">
+                    <p:outputLabel value="Código"></p:outputLabel>            	
+                    <p:inputNumber value="#{cidadeCon.selecionado.id}"></p:inputNumber>
+                    
+                    <p:outputLabel value="Nome"></p:outputLabel>            	
+                    <p:inputText value="#{cidadeCon.selecionado.nome}"></p:inputText>
+                    
+                    <p:outputLabel value="UF"></p:outputLabel>
+                    <p:selectOneMenu value="#{cidadeCon.selecionado.uf}">
+                    	<f:selectItem itemLabel="Rio Grande do Sul" itemValue="RS"></f:selectItem>
+                    	<f:selectItem itemLabel="Santa Catarina" itemValue="SC"></f:selectItem>
+                    	<f:selectItem itemLabel="Paraná" itemValue="PR"></f:selectItem>
+                    </p:selectOneMenu>
+                                	
+            	</p:panelGrid>
+            	<p:commandButton value="Salvar" action="#{cidadeCon.salvar}" 
+                  update="consultar editar"></p:commandButton>
+            	<p:commandButton value="Cancelar" action="#{cidadeCon.cancelar}" 
+                  update="consultar editar"></p:commandButton>
+            
+            </h:form>   
+        </p:panel>      
+        
+    </h:body>
+</html>
